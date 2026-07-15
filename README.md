@@ -16,6 +16,24 @@
 - 通用课程报告默认不带校名；只有明确选择 `hust_thesis` 时才使用华科论文前置结构。
 - 最终验证会检查样式、编号、引用、题注、页码、表头、脚注/尾注部件、占位符、修订痕迹和不可移植对象。
 
+## 生成效果
+
+以下页面来自同一份端到端验收报告，是 Skill 实际生成并通过结构验证和逐页渲染检查的 Word 成品，不是设计示意图。
+
+| 封面 | 自动目录（仅一、二级标题） |
+| --- | --- |
+| [![课程报告封面](docs/images/sample-cover.png)](docs/images/sample-cover.png) | [![自动目录](docs/images/sample-toc.png)](docs/images/sample-toc.png) |
+
+| 四级标题、正文引用与列表 | 图与真实字段题注 |
+| --- | --- |
+| [![标题层级与引用](docs/images/sample-headings-citations.png)](docs/images/sample-headings-citations.png) | [![图片与题注](docs/images/sample-figure-caption.png)](docs/images/sample-figure-caption.png) |
+
+| 三线表、公式与编号 | 参考文献 |
+| --- | --- |
+| [![表格和公式](docs/images/sample-table-equation.png)](docs/images/sample-table-equation.png) | [![参考文献](docs/images/sample-references.png)](docs/images/sample-references.png) |
+
+点击图片可以查看完整页面。示例使用通用课程报告模式；华科论文模式会另外生成中英文封面、声明、摘要和罗马数字前置页码。
+
 ## 安装
 
 ```bash
