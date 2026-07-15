@@ -30,14 +30,16 @@ Choose one mode:
 
 Choose one document type:
 
-1. `course_report` by default. Use the generic cover and never add HUST branding, declarations, or degree language.
+1. `course_report` by default. This is school-neutral and suitable for any university, course, laboratory, or general academic report. Use the generic cover and never add HUST branding, declarations, or degree language.
 2. `hust_thesis` only when the user explicitly requests the HUST thesis shell or supplies HUST thesis requirements.
+
+Resolve the cover choice before building. Use the generic course-report cover by default; use the HUST cover only with `hust_thesis`; or preserve an external institutional/course cover when the user supplies that template. Never infer HUST mode from this skill's formatting provenance. Record the choice as `requirements.cover_choice` with `generic`, `hust`, or `external`.
 
 For `hust_thesis`, collect every Chinese/English cover field listed in `references/request-schema.md`. The retained front matter is three physical pages: Chinese cover, English title page, then originality/copyright declarations. Do not omit those pages or translate names, majors, degrees, and dates by guessing.
 
 If the user supplies an external template or written formatting rules, run `analyze` on the template and compare it with `references/style-contract.json`. Present all material conflicts together and wait for one resolution. Do not silently choose between conflicting page geometry, fonts, cover structure, heading numbering, citation style, or page-number zones. After confirmation, record the decision in `requirements.conflict_resolution` and keep it fixed for that run.
 
-For a structured external template containing its own cover, front matter, and sections, use the Documents template/base-replace workflow with that file as the base. Use this skill's style contract only for unspecified roles. For a style-only template, overlay its styles after mapping every used source style.
+For a structured external template containing its own cover, front matter, and sections, use the Documents template/base-replace workflow with that file as the base. Preserve the supplied cover rather than regenerating the generic or HUST cover. Use this skill's style contract only for unspecified roles. For a style-only template, overlay its styles after mapping every used source style.
 
 ## Collect complete inputs
 

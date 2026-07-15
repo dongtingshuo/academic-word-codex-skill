@@ -28,6 +28,7 @@ Use one JSON object per build.
   "requirements": {
     "citation_style": "GB/T 7714-2015 numeric",
     "include_toc": true,
+    "cover_choice": "generic",
     "external_template": null,
     "conflict_resolution": null,
     "required_metadata": []
@@ -67,6 +68,7 @@ Use one JSON object per build.
 - `draft`: `content.markdown` or a readable Markdown path.
 - `format`: an existing `content.source_docx`.
 - `hust_thesis`: additionally require `student_id`, `major`, `major_en`, `advisor`, `advisor_en`, `institution`, `date`, `date_en`, `title_en`, `author_en`, `degree_en`, `classification`, `secrecy`, Chinese/English abstracts, and both keyword lists. These fields drive the Chinese cover, English title page, and declarations and must never be guessed.
+- `requirements.cover_choice`: use `generic` by default for any school, `hust` only with `document_type=hust_thesis`, or `external` when an uploaded institutional/course Word template supplies the cover. An external cover is handled through the template/base-replace workflow rather than the generic builder.
 - Every `[@id]` in Markdown must have exactly one citation record with the same `id`.
 - Every `{{figure:id}}` marker must have exactly one readable figure asset.
 
