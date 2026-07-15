@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "source": {
+    "name": "hust-thesis-word",
+    "reference_year": 2016,
+    "authority": "assets/style-authority.dotx",
+    "note": "Fallback visual system only; not a claim of current official HUST compliance."
+  },
+  "page": {
+    "size": "A4",
+    "width_dxa": 11906,
+    "height_dxa": 16838,
+    "margin_top_dxa": 2552,
+    "margin_right_dxa": 1588,
+    "margin_bottom_dxa": 1588,
+    "margin_left_dxa": 1588,
+    "header_dxa": 851,
+    "footer_dxa": 964,
+    "first_section_page_code": 9,
+    "first_section_column_space_dxa": 425,
+    "other_section_column_space_dxa": 720,
+    "document_grid": {"type": "linesAndChars", "line_pitch_dxa": 312}
+  },
+  "fonts": {
+    "body_east_asia": "宋体",
+    "body_latin": "Times New Roman",
+    "heading_east_asia": "黑体",
+    "heading_latin": "Arial",
+    "math": "Cambria Math",
+    "portable_allowlist": ["宋体", "黑体", "Times New Roman", "Arial", "Cambria Math"]
+  },
+  "styles": {
+    "body": {"name": "宋体小四", "size_pt": 12, "first_line_dxa": 480, "line_dxa": 300, "alignment": "both"},
+    "heading_1": {"style_id": "10", "name": "heading 1", "num_id": "23", "east_asia_font": "黑体", "latin_font": "Arial", "size_pt": 16, "alignment": "center", "outline_level": 0, "page_break_before": true, "space_before_dxa": 360, "space_after_dxa": 360, "line_dxa": 360},
+    "heading_2": {"style_id": "2", "name": "heading 2", "num_id": "23", "numbering_level": 1, "east_asia_font": "黑体", "latin_font": "Arial", "size_pt": 14, "alignment": "both", "outline_level": 1, "space_before_dxa": 200, "space_after_dxa": 140, "line_dxa": 360, "right_indent_dxa": 210},
+    "heading_3": {"style_id": "3", "name": "heading 3", "num_id": "23", "numbering_level": 2, "east_asia_font": "黑体", "latin_font": "Arial", "size_pt": 12, "alignment": "both", "outline_level": 2, "space_before_dxa": 140, "space_after_dxa": 80, "line_dxa": 322},
+    "heading_4": {"style_id": "4", "name": "heading 4", "num_id": "23", "numbering_level": 3, "east_asia_font": "黑体", "latin_font": "黑体", "size_pt": 12, "alignment": "both", "outline_level": 3, "space_before_dxa": 280, "space_after_dxa": 290, "line_dxa": 300},
+    "unnumbered_heading": {"style_id": "aff2", "name": "无编号标题", "num_id": "0", "east_asia_font": "黑体", "latin_font": "Times New Roman", "size_pt": 16, "bold": true, "alignment": "center", "page_break_before": true},
+    "caption": {"style_id": "aff3", "name": "caption", "size_pt": 10.5, "alignment": "center", "space_before_dxa": 152, "space_after_dxa": 160, "line_dxa": 312},
+    "equation": {"style_id": "aff5", "name": "公式", "size_pt": 12, "center_tab_dxa": 4140, "right_tab_dxa": 8280, "line_dxa": 312},
+    "figure": {"style_id": "aff6", "name": "图片居中", "alignment": "center"},
+    "header": {"style_id": "ad", "name": "header", "size_pt": 9, "alignment": "center", "bottom_border": {"style": "single", "size_eighth_pt": 6, "space_pt": 1}},
+    "footer": {"style_id": "af1", "name": "footer", "size_pt": 9, "alignment": "frame-centered", "page_number_style_id": "af2"},
+    "toc_1": {"style_id": "TOC1", "name": "toc 1"},
+    "toc_2": {"style_id": "TOC2", "name": "toc 2"},
+    "toc_3": {"style_id": "TOC3", "name": "toc 3", "included_in_toc": false},
+    "references": {"name": "direct-formatting-as-retained", "size_pt": 10, "hanging_dxa": 360}
+  },
+  "numbering": {
+    "headings": ["%1", "%1.%2", "%1.%2.%3", "%1.%2.%3.%4"],
+    "authoritative_num_id": "23",
+    "paragraph_numbering_source": "style-only-no-direct-numPr",
+    "heading_number_font_matches_heading": true,
+    "figure_label": "图",
+    "table_label": "表",
+    "equation_label": "公式",
+    "chapter_separator": "-",
+    "caption_number_structure": "literal label + visible STYLEREF 1 \\n field + separator + visible SEQ field"
+  },
+  "citations": {
+    "style": "GB/T 7714-2015 numeric",
+    "in_text": "superscript-square-bracket-number",
+    "example": "[1]"
+  },
+  "page_numbering": {
+    "cover": {"visible": false, "internal_format": "upperRoman", "start": 1},
+    "front_matter": {"format": "upperRoman", "start": 1},
+    "body": {"format": "decimal", "start": 1}
+  },
+  "settings": {
+    "source": "word/settings.xml from retained DOTX",
+    "default_tab_stop_dxa": 420,
+    "drawing_grid_vertical_spacing_dxa": 156,
+    "character_spacing_control": "compressPunctuation",
+    "theme_east_asia_language": "zh-CN",
+    "required_addition": "w:updateFields=true"
+  },
+  "note_parts": {
+    "required_by_settings": true,
+    "parts": ["word/footnotes.xml", "word/endnotes.xml"],
+    "separator_ids": [-1, 0],
+    "require_document_relationships": true,
+    "require_content_type_overrides": true
+  },
+  "defaults": {
+    "document_type": "course_report",
+    "citation_style": "GB/T 7714-2015 numeric",
+    "include_toc": true,
+    "toc_max_level": 2,
+    "conflict_policy": "ask_once_and_lock",
+    "wps_profile": "portable-ooxml"
+  }
+}

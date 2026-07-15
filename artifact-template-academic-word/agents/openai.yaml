@@ -1,0 +1,7 @@
+interface:
+  display_name: "论文与课程报告 Word 完稿"
+  short_description: "生成或重排无需手调的论文与课程报告 Word"
+  icon_large: "./assets/preview.png"
+  default_prompt: "Use $artifact-template-academic-word to create a submission-ready Word paper or course report from my requirements and source materials."
+policy:
+  allow_implicit_invocation: true

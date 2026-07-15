@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.validation.json
+*.pdf
+~$*.docx
+~$*.dotx
+.venv/
+dist/
+rendered/
+tmp/

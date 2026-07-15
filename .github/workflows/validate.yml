@@ -1,0 +1,28 @@
+name: Validate skill
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPYCACHEPREFIX: /tmp/academic-word-pycache
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - run: python -m py_compile artifact-template-academic-word/scripts/academic_word.py tools/validate_public_package.py
+      - run: python tools/validate_public_package.py
+      - run: python artifact-template-academic-word/scripts/academic_word.py validate --input artifact-template-academic-word/assets/clean-report.docx
+      - run: python artifact-template-academic-word/scripts/academic_word.py validate --input artifact-template-academic-word/assets/clean-thesis.docx
+      - run: python artifact-template-academic-word/scripts/academic_word.py make-masters --output-dir /tmp/academic-word-masters
+      - run: python artifact-template-academic-word/scripts/academic_word.py validate --input /tmp/academic-word-masters/clean-report.docx
+      - run: python artifact-template-academic-word/scripts/academic_word.py validate --input /tmp/academic-word-masters/clean-thesis.docx
