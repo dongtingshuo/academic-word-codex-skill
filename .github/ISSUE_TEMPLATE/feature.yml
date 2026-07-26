@@ -1,0 +1,29 @@
+name: Feature request / 功能建议
+description: Propose a documented, evidence-based improvement / 提出有依据、可说明的改进
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / 问题
+      description: Describe the document workflow problem, not only a preferred implementation. / 请描述文档工作流问题，而不只是实现偏好。
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Requirements or authoritative source / 要求或权威来源
+      description: Link to a public specification or provide a sanitized rule excerpt when applicable. / 如适用，请链接公开规范或提供脱敏后的规则摘要。
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior / 建议行为
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility and risks / 兼容性与风险
+      description: Consider Word, LibreOffice, WPS, existing documents, and template licensing. / 请考虑 Word、LibreOffice、WPS、现有文档及模板许可。

@@ -2,6 +2,10 @@
 
 [中文](README.md)
 
+[![Validate skill](https://github.com/dongtingshuo/academic-word-codex-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/dongtingshuo/academic-word-codex-skill/actions/workflows/validate.yml)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-315b4a.svg)](https://www.python.org/)
+[![License: MIT (original code)](https://img.shields.io/badge/license-MIT%20(original%20code)-315b4a.svg)](LICENSE)
+
 A Codex skill for Chinese academic papers, theses, and course reports. It turns user-supplied topics, evidence, citations, assets, and existing Word documents into submission-ready `.docx` files with structural validation and page-by-page visual QA.
 
 > **This skill is not limited to Huazhong University of Science and Technology.** The default mode is a school-neutral course report suitable for other universities, training courses, lab reports, and general academic reports. HUST thesis formatting is an optional mode that must be explicitly selected.
@@ -17,6 +21,23 @@ A Codex skill for Chinese academic papers, theses, and course reports. It turns 
 - Use GB/T 7714—2015 numeric citations by default, with superscript square-bracket citations in the body.
 - Use a generic course-report shell by default; HUST-specific front matter is enabled only when `hust_thesis` is explicitly selected.
 - Validate styles, numbering, citations, captions, page numbering, repeating table headers, note parts, placeholders, revisions, and non-portable objects.
+
+## Workflow
+
+```mermaid
+flowchart LR
+    A["User materials<br/>topic, text, data, sources"] --> B{"Choose a mode"}
+    B -->|draft| C["Draft only from supplied evidence"]
+    B -->|format| D["Preserve source content and media"]
+    C --> E["Build structured DOCX"]
+    D --> E
+    E --> F["Validate OpenXML structure"]
+    F --> G["Refresh fields in Word"]
+    G --> H["Render and inspect every page"]
+    H --> I["Submission-ready DOCX"]
+```
+
+Any structural error blocks delivery. Experimental data, author metadata, DOIs, and references must come from user materials or verified sources.
 
 ## Generated Output
 
@@ -77,6 +98,8 @@ Reformat this existing paper without changing its content. Keep only first- and 
 
 A complete drafting request needs at least a title, author, document type, body or outline, factual materials, and citation sources. The skill never invents experimental results, author metadata, DOIs, or references; it requests missing required information together.
 
+See [CHANGELOG.md](CHANGELOG.md) for version history. Stable versions are published through [GitHub Releases](https://github.com/dongtingshuo/academic-word-codex-skill/releases).
+
 ## Formatting Contract
 
 - A4 page geometry, margins, headers, footers, and document grid follow the accepted template.
@@ -96,6 +119,10 @@ python artifact-template-academic-word/scripts/academic_word.py validate \
 ```
 
 Microsoft Word is the preferred final environment for field refresh and submission checks. LibreOffice is used for page-by-page rendering. WPS is supported through a conservative OpenXML subset, but pixel-identical rendering with Word is not claimed.
+
+## Contributing and Security
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting code, template, or documentation changes. Report security concerns privately as described in [SECURITY.md](SECURITY.md); never include an unredacted manuscript, personal data, or vulnerability details in a public issue.
 
 ## Privacy, Provenance, and License
 

@@ -1,0 +1,62 @@
+name: Bug report / 缺陷报告
+description: Report a reproducible builder, validation, or document issue / 报告可复现的生成、验证或文档问题
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Remove personal data and confidential manuscript content before attaching files.
+        附件上传前请删除个人信息和保密文稿内容。
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit / 版本或提交
+      placeholder: v1.0.0 or commit SHA
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode / 模式
+      options:
+        - draft
+        - format
+        - validate
+        - installation or documentation / 安装或文档
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction / 最小复现
+      description: Include sanitized inputs and exact commands. / 提供脱敏输入和实际命令。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior / 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and validation output / 实际行为与验证输出
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment / 环境
+      placeholder: macOS 15, Microsoft Word 16.x, Python 3.12
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check / 隐私确认
+      options:
+        - label: I removed personal, confidential, and institutional data. / 我已删除个人、保密和学校敏感信息。
+          required: true

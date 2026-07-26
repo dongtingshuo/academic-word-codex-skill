@@ -5,9 +5,11 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 import zipfile
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree as ET
 
 
@@ -27,6 +29,16 @@ REQUIRED_AUTHORITY_PARTS = {
     "word/footnotes.xml",
     "word/endnotes.xml",
 }
+MARKDOWN_FILES = (
+    ROOT / "README.md",
+    ROOT / "README_EN.md",
+    ROOT / "CHANGELOG.md",
+    ROOT / "THIRD_PARTY_NOTICES.md",
+    ROOT / "CONTRIBUTING.md",
+    ROOT / "SECURITY.md",
+    SKILL / "SKILL.md",
+    SKILL / "references" / "request-schema.md",
+)
 
 
 def fail(message: str) -> None:
@@ -79,17 +91,47 @@ def check_office_asset(path: Path, authority: bool = False) -> None:
             fail(f"{path.name} has the wrong main content type")
 
 
+def check_documentation() -> None:
+    for path in MARKDOWN_FILES:
+        if not path.is_file():
+            fail(f"required documentation is missing: {path.relative_to(ROOT)}")
+        content = path.read_text(encoding="utf-8")
+        for match in re.finditer(r"!?\[[^\]]*]\(([^)\s]+)", content):
+            reference = match.group(1)
+            parsed = urlsplit(reference)
+            if parsed.scheme or reference.startswith(("#", "//", "mailto:", "tel:")):
+                continue
+            target = (path.parent / unquote(parsed.path)).resolve()
+            if not target.is_relative_to(ROOT.resolve()):
+                fail(f"{path.relative_to(ROOT)} links outside the package: {reference}")
+            if not target.exists():
+                fail(f"{path.relative_to(ROOT)} contains a broken local link: {reference}")
+
+    if "[English](README_EN.md)" not in (ROOT / "README.md").read_text(encoding="utf-8"):
+        fail("README.md must link to the English documentation")
+    if "[中文](README.md)" not in (ROOT / "README_EN.md").read_text(encoding="utf-8"):
+        fail("README_EN.md must link to the Chinese documentation")
+
+
 def main() -> None:
     check_skill()
+    check_documentation()
     check_office_asset(ASSETS / "style-authority.dotx", authority=True)
     check_office_asset(ASSETS / "clean-report.docx")
     check_office_asset(ASSETS / "clean-thesis.docx")
+    distributable_paths = subprocess.run(
+        ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    ).stdout.decode("utf-8").split("\0")
     forbidden_files = []
-    for path in ROOT.rglob("*"):
-        if not path.is_file() or ".git" in path.parts:
+    for relative_path in filter(None, distributable_paths):
+        path = ROOT / relative_path
+        if not path.is_file():
             continue
         if path.name.startswith("~$") or path.suffix in {".pyc", ".pdf"} or "__pycache__" in path.parts:
-            forbidden_files.append(str(path.relative_to(ROOT)))
+            forbidden_files.append(relative_path)
     if forbidden_files:
         fail(f"forbidden distributable files: {forbidden_files}")
     print("Public package validation passed")
