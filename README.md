@@ -2,6 +2,10 @@
 
 [English](README_EN.md)
 
+[![Validate skill](https://github.com/dongtingshuo/academic-word-codex-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/dongtingshuo/academic-word-codex-skill/actions/workflows/validate.yml)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-315b4a.svg)](https://www.python.org/)
+[![License: MIT (original code)](https://img.shields.io/badge/license-MIT%20(original%20code)-315b4a.svg)](LICENSE)
+
 面向中文论文、学位论文和课程报告的 Codex Skill。它把用户提供的题目、材料、引用和现有 Word 文档整理为可提交的 `.docx`，并通过结构检查与逐页渲染控制排版质量。
 
 > **不限华中科技大学使用。** 默认模式是无校名限制的通用课程报告，适用于其他高校、培训课程、实验报告和一般学术报告。华科论文只是一个必须由用户明确选择的可选模式。
@@ -17,6 +21,23 @@
 - 默认使用 GB/T 7714—2015 顺序编码，正文引用为上标方括号编号。
 - 通用课程报告默认不带校名；只有明确选择 `hust_thesis` 时才使用华科论文前置结构。
 - 最终验证会检查样式、编号、引用、题注、页码、表头、脚注/尾注部件、占位符、修订痕迹和不可移植对象。
+
+## 工作流
+
+```mermaid
+flowchart LR
+    A["用户材料<br/>题目、正文、数据、来源"] --> B{"选择模式"}
+    B -->|draft| C["依据已提供证据起草"]
+    B -->|format| D["保留原稿内容与媒体"]
+    C --> E["构建结构化 DOCX"]
+    D --> E
+    E --> F["OpenXML 结构验证"]
+    F --> G["Word 字段刷新"]
+    G --> H["逐页渲染与视觉检查"]
+    H --> I["可提交的最终 DOCX"]
+```
+
+任何结构错误都会阻止交付；实验数据、作者信息、DOI 和参考文献只能来自用户材料或已核验来源。
 
 ## 生成效果
 
@@ -77,6 +98,8 @@ python -m pip install -r requirements.txt
 
 完整写作至少需要题目、作者、文档类型、正文或提纲、事实材料和引用来源。Skill 不会编造实验数据、作者信息、DOI 或参考文献；必要信息缺失时会集中询问。
 
+版本变化记录在 [CHANGELOG.md](CHANGELOG.md)，稳定版本通过 [GitHub Releases](https://github.com/dongtingshuo/academic-word-codex-skill/releases) 发布。
+
 ## 排版契约
 
 - A4 页面，版心、页边距、页眉页脚和文档网格沿用已验收模板。
@@ -96,6 +119,10 @@ python artifact-template-academic-word/scripts/academic_word.py validate \
 ```
 
 Microsoft Word 是最终字段刷新与提交检查的优先环境；LibreOffice 用于逐页渲染验证。WPS 使用保守 OpenXML 子集，但不承诺与 Word 像素级完全一致。
+
+## 参与贡献与安全
+
+提交代码、模板或文档改进前，请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。安全问题请按 [SECURITY.md](SECURITY.md) 私下报告，不要在公开 Issue 中包含未脱敏文稿、个人信息或漏洞细节。
 
 ## 隐私、来源与许可
 
